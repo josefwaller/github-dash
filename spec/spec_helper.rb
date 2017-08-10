@@ -1,5 +1,16 @@
 require "bundler/setup"
 require "github_dash"
+require "webmock/rspec"
+require "vcr"
+
+# Enable WebMock
+WebMock.disable_net_connect!(allow_localhost: false)
+
+# Enable VCR
+VCR.configure do |c|
+  c.cassette_library_dir = "spec/cassettes"
+  c.hook_into :webmock
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

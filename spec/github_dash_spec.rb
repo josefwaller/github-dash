@@ -5,7 +5,10 @@ RSpec.describe GithubDash do
     expect(GithubDash::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "fetches a repositroy" do
+    VCR.use_cassette "rails" do
+      repo = GithubDash::fetch_repository "rails/rails"
+      expect(repo.data.name).to eq("rails")
+    end
   end
 end
