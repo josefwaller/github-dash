@@ -45,5 +45,26 @@ RSpec.describe GithubDash do
       prs = @repo.get_pull_requests(days=100, up_to=25)
       expect(prs.length).to eq(25)
     end
+
+    it "gets all commits in the last day" do
+      commits = @repo.get_commits(days=1)
+      expect(commits.length).to eq(0)
+    end
+    it "gets all commits in the last week" do
+      commits = @repo.get_commits(days=7)
+      expect(commits.length).to eq(43)
+    end
+    it "gets all commits in the last month" do
+      commits = @repo.get_commits(days=30)
+      expect(commits.length).to eq(99)
+    end
+    it "limits the number of commits to 100 by default" do
+      commits = @repo.get_commits(days=300)
+      expect(commits.length).to eq(100)
+    end
+    it "limits the number of commits when given a limit" do
+      commits = @repo.get_commits(days=100, up_to=25)
+      expect(commits.length).to eq(25)
+    end
   end
 end
