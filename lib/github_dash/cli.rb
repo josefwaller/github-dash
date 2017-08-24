@@ -88,11 +88,11 @@ module GithubDash
         contents.split("\n").each do |r|
           output = ""
           repo = GithubDash::fetch_repository r
-          output += set_str_size(repo.data.full_name, 40)
+          output += "<%= color('#{set_str_size(repo.data.full_name, 30)}', YELLOW) %>"
           output += " | "
-          output += "<%= color('#{set_str_size("#{repo.get_pull_requests.size} PRs in the last week", 40)}', GREEN) %>"
+          output += "<%= color('#{set_str_size("#{repo.get_pull_requests.size} PRs in the last week", 25)}', GREEN) %>"
           output += " | "
-          output += "<%= color('#{set_str_size("#{repo.get_commits.size} commits in the last week", 40)}', LIGHT_BLUE) %>"
+          output += "<%= color('#{set_str_size("#{repo.get_commits.size} commits in the last week", 35)}', LIGHT_BLUE) %>"
           output += "\n"
           @hl.say output
         end
@@ -103,19 +103,27 @@ module GithubDash
     desc "repo REPO_NAME", "Logs a bunch of information about a repository"
     def repo(name)
       repo = GithubDash::fetch_repository(name)
-      @hl.say "=== #{repo.data.full_name} ==="
+      @hl.say "=== <%= color('#{repo.data.full_name}', YELLOW) %> ==="
       @hl.say "=============================="
-      @hl.say "Commits from the last #{options[:days]} day#{"s" if options[:days] > 1}."
+      @hl.say "Commits from the last <%= color('#{options[:days]}', GREEN) %> day#{"s" if options[:days] > 1}."
       @hl.say "---------"
       repo.get_commits(days=options[:days]).each do |c|
-        @hl.say "[#{c.commit.author.date}] - #{c.commit.message.split("\n").first} (by #{c.commit.author.name})"
+        output = ""
+        output += "[<%= color('#{c.commit.author.date}', LIGHT_BLUE) %>] - "
+        output += "<%= color('#{c.commit.message.split("\n").first}', YELLOW) %> "
+        output += "(by <%= color('#{c.commit.author.name}', GREEN) %>)"
+        @hl.say output
         @hl.say "-----------------------"
       end
       @hl.say "=============================="
-      @hl.say "PRs from the last #{options[:days]} day#{"s" if options[:days] > 1}."
+      @hl.say "PRs from the last <%= color('#{options[:days]}', GREEN) %> day#{"s" if options[:days] > 1}."
       @hl.say "---------------"
       repo.get_pull_requests(days=options[:days]).each do |pr|
-        @hl.say "[#{pr.updated_at}] - #{pr.title} (by #{pr.user.login})."
+        output = ""
+        output += "[<%= color('#{pr.updated_at}', LIGHT_BLUE) %>] - "
+        output += "<%= color('#{pr.title}', YELLOW) %> "
+        output += "(by <%= color('#{pr.user.login}', GREEN) %>)."
+        @hl.say output
         @hl.say "-----------------------"
       end
     end
@@ -139,10 +147,6 @@ module GithubDash
         unless File.directory? dirname
           FileUtils.mkdir_p dirname
         end
-      end
-      # Get the path to the file containing all followed repos' names
-      def repos_file_path
-        "#{ENV['HOME']}/.github_dash/repositories.txt"
       end
 
       def set_hl(hl)

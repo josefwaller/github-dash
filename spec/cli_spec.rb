@@ -19,6 +19,10 @@ RSpec.describe GithubDash::CLI do
     FileUtils.rm_r "./tmp_home/" if File.directory? "./tmp_home"
   end
 
+  def strip_color(str)
+    return str.gsub(/\e\[[0-9]*m/, "")
+  end
+
   it "logs repo information" do
     VCR.use_cassette :pycatan do
       subject.options = {days: 7}
@@ -30,14 +34,14 @@ RSpec.describe GithubDash::CLI do
     VCR.use_cassette :githubdash do
       subject.options = {days: 10}
       subject.repo "josefwaller/github-dash"
-      expect(@out.string).to include("Commits from the last 10 days")
+      expect(strip_color @out.string).to include("Commits from the last 10 days")
     end
   end
   it "uses day with singular days" do
     VCR.use_cassette :githubdash do
       subject.options = {days: 1}
       subject.repo "josefwaller/github-dash"
-      expect(@out.string).to include("Commits from the last 1 day")
+      expect(strip_color @out.string).to include("Commits from the last 1 day")
     end
   end
   it "adds repositories" do
@@ -65,8 +69,8 @@ RSpec.describe GithubDash::CLI do
         subject.following
       end
     end
-    expect(@out.string).to include "josefwaller/PyCatan"
-    expect(@out.string).to include "josefwaller/github-dash"
+    expect(strip_color @out.string).to include "josefwaller/PyCatan"
+    expect(strip_color @out.string).to include "josefwaller/github-dash"
   end
   it "removes repositories with remove_repo" do
     VCR.use_cassette :pycatan do
