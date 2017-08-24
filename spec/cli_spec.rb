@@ -51,4 +51,19 @@ RSpec.describe GithubDash::CLI do
     end
     expect(@out.string).to include "Repository is already followed"
   end
+  it "logs following repositories" do
+    VCR.use_cassette :pycatan do
+      subject.add_repo "josefwaller/pycatan"
+    end
+    VCR.use_cassette :githubdash do
+      subject.add_repo "josefwaller/github-dash"
+    end
+    VCR.use_cassette :githubdash do
+      VCR.use_cassette :pycatan do
+        subject.following
+      end
+    end
+    expect(@out.string).to include "josefwaller/PyCatan"
+    expect(@out.string).to include "josefwaller/github-dash"
+  end
 end

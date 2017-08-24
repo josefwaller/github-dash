@@ -19,12 +19,7 @@ module GithubDash
       repo = GithubDash::fetch_repository(name)
 
       # Get the filepath to the followed repos file
-      dirname = File.dirname(repos_file_path)
-
-      # Create it and parent folders if they don't exist
-      unless File.directory?(dirname)
-        FileUtils.mkdir_p(dirname)
-      end
+      create_settings_dir
 
       # Open it
       File.open repos_file_path, 'a+' do |f|
@@ -42,6 +37,39 @@ module GithubDash
         # Add repopsitory to file
         f.puts (name)
         @hl.say "Added #{name} to followed repositories."
+      end
+    end
+
+    desc "following", "Show all the repopsitories the user is following"
+    def following
+
+      create_settings_dir
+
+      # Create an empty file if the file does not exist
+      unless File.file? repos_file_path
+        File.open(repos_file_path, "w").close
+      end
+      file = File.open(repos_file_path, "r")
+
+      # Get the file contents
+      contents = file.read
+      file.close
+
+      if contents.empty?
+        @hl.say "Not following any repositories. Add repositories with add_repo."
+      else
+        # Log each repo
+        contents.split("\n").each do |r|
+          output = ""
+          repo = GithubDash::fetch_repository r
+          output += set_str_size(repo.data.full_name, 40)
+          output += " | "
+          output += "<%= color('#{set_str_size("#{repo.get_pull_requests.size} PRs in the last week", 40)}', GREEN) %>"
+          output += " | "
+          output += "<%= color('#{set_str_size("#{repo.get_commits.size} commits in the last week", 40)}', LIGHT_BLUE) %>"
+          output += "\n"
+          @hl.say output
+        end
       end
     end
 
@@ -67,6 +95,25 @@ module GithubDash
     end
 
     no_commands do
+      # Get the path to the file containing all followed repos' names
+      def repos_file_path
+        "#{ENV['HOME']}/.github_dash/repositories.txt"
+      end
+
+      # Minor helper method for setting string size
+      #   will trunicate string if too big or add spaces if too small
+      def set_str_size(str, size)
+        str.ljust(size)[0..size]
+      end
+
+      def create_settings_dir
+        dirname = File.dirname repos_file_path
+
+        # Create it and parent folders if they don't exist
+        unless File.directory? dirname
+          FileUtils.mkdir_p dirname
+        end
+      end
       # Get the path to the file containing all followed repos' names
       def repos_file_path
         "#{ENV['HOME']}/.github_dash/repositories.txt"
