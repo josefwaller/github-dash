@@ -2,6 +2,7 @@ require "thor"
 require "github_dash"
 require "highline"
 require "pp"
+require "fileutils"
 
 module GithubDash
   class CLI < Thor
@@ -9,6 +10,39 @@ module GithubDash
     def initialize(*args)
       super
       @hl = HighLine.new
+    end
+
+    desc "add_repo REPO_NAME", "Adds a repository to the 'followed repositories' list"
+    def add_repo(name)
+
+      # Make sure the repository exists in github
+      repo = GithubDash::fetch_repository(name)
+
+      # Get the filepath to the followed repos file
+      dirname = File.dirname(repos_file_path)
+
+      # Create it and parent folders if they don't exist
+      unless File.directory?(dirname)
+        FileUtils.mkdir_p(dirname)
+      end
+
+      # Open it
+      File.open repos_file_path, 'a+' do |f|
+        # Read all contents and make sure the file doesn't already
+        #   contain this repository
+        contents = f.read
+        contents.gsub(/\r\n?/, "\n")
+        contents.each_line do |l|
+          if l.gsub(/\n/, "") == name
+            # Warn user and quit
+            @hl.say "Repository is already followed!"
+            return
+          end
+        end
+        # Add repopsitory to file
+        f.puts (name)
+        @hl.say "Added #{name} to followed repositories."
+      end
     end
 
     option :days, :aliases => [:d], :type => :numeric, :default => 7
@@ -31,7 +65,13 @@ module GithubDash
         @hl.say "-----------------------"
       end
     end
+
     no_commands do
+      # Get the path to the file containing all followed repos' names
+      def repos_file_path
+        "#{ENV['HOME']}/.github_dash/repositories.txt"
+      end
+
       def set_hl(hl)
         @hl = hl
       end

@@ -267,4 +267,76 @@ http_interactions:
       string: "[]"
     http_version: 
   recorded_at: Mon, 21 Aug 2017 22:37:30 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/josefwaller/pycatan
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.7.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 22 Aug 2017 16:42:27 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '44'
+      X-Ratelimit-Reset:
+      - '1503422651'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      - Accept-Encoding
+      Etag:
+      - W/"867ddc5a867d8c783d129850dbbded8e"
+      Last-Modified:
+      - Sat, 12 Aug 2017 20:55:10 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.036182'
+      X-Github-Request-Id:
+      - C48A:C6D5:177D15:1EAA58:599C5EF2
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":62670182,"name":"PyCatan","full_name":"josefwaller/PyCatan","owner":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"private":false,"html_url":"https://github.com/josefwaller/PyCatan","description":"An
+        API for playing The Settlers of Catan in Python.","fork":false,"url":"https://api.github.com/repos/josefwaller/PyCatan","forks_url":"https://api.github.com/repos/josefwaller/PyCatan/forks","keys_url":"https://api.github.com/repos/josefwaller/PyCatan/keys{/key_id}","collaborators_url":"https://api.github.com/repos/josefwaller/PyCatan/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/josefwaller/PyCatan/teams","hooks_url":"https://api.github.com/repos/josefwaller/PyCatan/hooks","issue_events_url":"https://api.github.com/repos/josefwaller/PyCatan/issues/events{/number}","events_url":"https://api.github.com/repos/josefwaller/PyCatan/events","assignees_url":"https://api.github.com/repos/josefwaller/PyCatan/assignees{/user}","branches_url":"https://api.github.com/repos/josefwaller/PyCatan/branches{/branch}","tags_url":"https://api.github.com/repos/josefwaller/PyCatan/tags","blobs_url":"https://api.github.com/repos/josefwaller/PyCatan/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/josefwaller/PyCatan/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/josefwaller/PyCatan/git/refs{/sha}","trees_url":"https://api.github.com/repos/josefwaller/PyCatan/git/trees{/sha}","statuses_url":"https://api.github.com/repos/josefwaller/PyCatan/statuses/{sha}","languages_url":"https://api.github.com/repos/josefwaller/PyCatan/languages","stargazers_url":"https://api.github.com/repos/josefwaller/PyCatan/stargazers","contributors_url":"https://api.github.com/repos/josefwaller/PyCatan/contributors","subscribers_url":"https://api.github.com/repos/josefwaller/PyCatan/subscribers","subscription_url":"https://api.github.com/repos/josefwaller/PyCatan/subscription","commits_url":"https://api.github.com/repos/josefwaller/PyCatan/commits{/sha}","git_commits_url":"https://api.github.com/repos/josefwaller/PyCatan/git/commits{/sha}","comments_url":"https://api.github.com/repos/josefwaller/PyCatan/comments{/number}","issue_comment_url":"https://api.github.com/repos/josefwaller/PyCatan/issues/comments{/number}","contents_url":"https://api.github.com/repos/josefwaller/PyCatan/contents/{+path}","compare_url":"https://api.github.com/repos/josefwaller/PyCatan/compare/{base}...{head}","merges_url":"https://api.github.com/repos/josefwaller/PyCatan/merges","archive_url":"https://api.github.com/repos/josefwaller/PyCatan/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/josefwaller/PyCatan/downloads","issues_url":"https://api.github.com/repos/josefwaller/PyCatan/issues{/number}","pulls_url":"https://api.github.com/repos/josefwaller/PyCatan/pulls{/number}","milestones_url":"https://api.github.com/repos/josefwaller/PyCatan/milestones{/number}","notifications_url":"https://api.github.com/repos/josefwaller/PyCatan/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/josefwaller/PyCatan/labels{/name}","releases_url":"https://api.github.com/repos/josefwaller/PyCatan/releases{/id}","deployments_url":"https://api.github.com/repos/josefwaller/PyCatan/deployments","created_at":"2016-07-05T21:15:53Z","updated_at":"2017-08-12T20:55:10Z","pushed_at":"2016-11-19T21:39:42Z","git_url":"git://github.com/josefwaller/PyCatan.git","ssh_url":"git@github.com:josefwaller/PyCatan.git","clone_url":"https://github.com/josefwaller/PyCatan.git","svn_url":"https://github.com/josefwaller/PyCatan","homepage":null,"size":67,"stargazers_count":5,"watchers_count":5,"language":"Python","has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":1,"mirror_url":null,"open_issues_count":0,"forks":1,"open_issues":0,"watchers":5,"default_branch":"master","network_count":1,"subscribers_count":1}'
+    http_version: 
+  recorded_at: Tue, 22 Aug 2017 16:42:31 GMT
 recorded_with: VCR 3.0.3

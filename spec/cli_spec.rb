@@ -38,4 +38,17 @@ RSpec.describe GithubDash::CLI do
       expect(@out.string).to include("Commits from the last 1 day")
     end
   end
+  it "adds repositories" do
+    VCR.use_cassette :pycatan do
+      subject.add_repo "josefwaller/pycatan"
+    end
+    expect(@out.string).to include "Added josefwaller/pycatan"
+  end
+  it "shouldn't add a repository twice" do
+    VCR.use_cassette :pycatan do
+      subject.add_repo "josefwaller/pycatan"
+      subject.add_repo "josefwaller/pycatan"
+    end
+    expect(@out.string).to include "Repository is already followed"
+  end
 end
