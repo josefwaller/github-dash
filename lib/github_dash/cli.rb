@@ -3,6 +3,7 @@ require "github_dash"
 require "highline"
 require "pp"
 require "fileutils"
+require "tty-cursor"
 
 module GithubDash
   class CLI < Thor
@@ -67,6 +68,7 @@ module GithubDash
     end
 
     desc "following", "Show all the repopsitories the user is following"
+    option :liveupdate, :aliases => [:l], :type => :boolean, :default => false
     def following
 
       create_settings_dir
@@ -84,17 +86,35 @@ module GithubDash
       if contents.empty?
         @hl.say "Not following any repositories. Add repositories with add_repo."
       else
-        # Log each repo
+        repos = {}
         contents.split("\n").each do |r|
-          output = ""
-          repo = GithubDash::fetch_repository r
-          output += "<%= color('#{set_str_size(repo.data.full_name, 30)}', YELLOW) %>"
-          output += " | "
-          output += "<%= color('#{set_str_size("#{repo.get_pull_requests.size} PRs in the last week", 25)}', GREEN) %>"
-          output += " | "
-          output += "<%= color('#{set_str_size("#{repo.get_commits.size} commits in the last week", 35)}', LIGHT_BLUE) %>"
-          output += "\n"
-          @hl.say output
+          repos[r] = GithubDash::fetch_repository r
+        end
+        loop do
+          begin
+            # Gather output from each repo
+            all_output = ""
+            repos.each_with_index do |(r, val), i|
+              output = ""
+              output += "<%= color('#{set_str_size(val.data.full_name, 30)}', YELLOW) %>"
+              output += " | "
+              output += "<%= color('#{set_str_size("#{val.get_pull_requests.size} PRs in the last week", 25)}', GREEN) %>"
+              output += " | "
+              output += "<%= color('#{set_str_size("#{val.get_commits.size} commits in the last week", 35)}', LIGHT_BLUE) %>"
+              output += "\n"
+              all_output += output
+            end
+            if options[:liveupdate]
+              print TTY::Cursor.clear_screen
+              print TTY::Cursor.move_to
+              print TTY::Cursor.hide
+            end
+            @hl.say all_output
+            break unless options[:liveupdate]
+            sleep 10
+          ensure
+            print TTY::Cursor.show
+          end
         end
       end
     end

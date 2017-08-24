@@ -38,4 +38,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr", "~> 3.0.3"
   spec.add_dependency "thor", "~> 0.19.4"
   spec.add_dependency "highline", "~> 1.7.8"
+  spec.add_dependency "tty-cursor", "~> 0.5.0"
 end
