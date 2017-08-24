@@ -12,6 +12,12 @@ RSpec.describe GithubDash do
     end
   end
 
+  it "raises an ArgumentError if the repository does not exist" do
+    VCR.use_cassette "not_exist" do
+      expect{GithubDash::fetch_repository "not-exist/does-not-exist"}.to raise_error(ArgumentError)
+    end
+  end
+
   context "given a repository" do
     before(:all) do
       VCR.insert_cassette "rails", :record => :new_episodes
