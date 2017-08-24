@@ -1,0 +1,260 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/josefwaller/github-dash
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.7.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 21 Aug 2017 23:09:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '47'
+      X-Ratelimit-Reset:
+      - '1503358060'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      - Accept-Encoding
+      Etag:
+      - W/"90e40e4053b2ce54e0cd517866922a83"
+      Last-Modified:
+      - Thu, 10 Aug 2017 16:27:03 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.039270'
+      X-Github-Request-Id:
+      - 133D:C23A:114AF38:1557F69:599B683E
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":99943119,"name":"github-dash","full_name":"josefwaller/github-dash","owner":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"private":false,"html_url":"https://github.com/josefwaller/github-dash","description":null,"fork":false,"url":"https://api.github.com/repos/josefwaller/github-dash","forks_url":"https://api.github.com/repos/josefwaller/github-dash/forks","keys_url":"https://api.github.com/repos/josefwaller/github-dash/keys{/key_id}","collaborators_url":"https://api.github.com/repos/josefwaller/github-dash/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/josefwaller/github-dash/teams","hooks_url":"https://api.github.com/repos/josefwaller/github-dash/hooks","issue_events_url":"https://api.github.com/repos/josefwaller/github-dash/issues/events{/number}","events_url":"https://api.github.com/repos/josefwaller/github-dash/events","assignees_url":"https://api.github.com/repos/josefwaller/github-dash/assignees{/user}","branches_url":"https://api.github.com/repos/josefwaller/github-dash/branches{/branch}","tags_url":"https://api.github.com/repos/josefwaller/github-dash/tags","blobs_url":"https://api.github.com/repos/josefwaller/github-dash/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/josefwaller/github-dash/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/josefwaller/github-dash/git/refs{/sha}","trees_url":"https://api.github.com/repos/josefwaller/github-dash/git/trees{/sha}","statuses_url":"https://api.github.com/repos/josefwaller/github-dash/statuses/{sha}","languages_url":"https://api.github.com/repos/josefwaller/github-dash/languages","stargazers_url":"https://api.github.com/repos/josefwaller/github-dash/stargazers","contributors_url":"https://api.github.com/repos/josefwaller/github-dash/contributors","subscribers_url":"https://api.github.com/repos/josefwaller/github-dash/subscribers","subscription_url":"https://api.github.com/repos/josefwaller/github-dash/subscription","commits_url":"https://api.github.com/repos/josefwaller/github-dash/commits{/sha}","git_commits_url":"https://api.github.com/repos/josefwaller/github-dash/git/commits{/sha}","comments_url":"https://api.github.com/repos/josefwaller/github-dash/comments{/number}","issue_comment_url":"https://api.github.com/repos/josefwaller/github-dash/issues/comments{/number}","contents_url":"https://api.github.com/repos/josefwaller/github-dash/contents/{+path}","compare_url":"https://api.github.com/repos/josefwaller/github-dash/compare/{base}...{head}","merges_url":"https://api.github.com/repos/josefwaller/github-dash/merges","archive_url":"https://api.github.com/repos/josefwaller/github-dash/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/josefwaller/github-dash/downloads","issues_url":"https://api.github.com/repos/josefwaller/github-dash/issues{/number}","pulls_url":"https://api.github.com/repos/josefwaller/github-dash/pulls{/number}","milestones_url":"https://api.github.com/repos/josefwaller/github-dash/milestones{/number}","notifications_url":"https://api.github.com/repos/josefwaller/github-dash/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/josefwaller/github-dash/labels{/name}","releases_url":"https://api.github.com/repos/josefwaller/github-dash/releases{/id}","deployments_url":"https://api.github.com/repos/josefwaller/github-dash/deployments","created_at":"2017-08-10T16:23:17Z","updated_at":"2017-08-10T16:27:03Z","pushed_at":"2017-08-16T18:36:54Z","git_url":"git://github.com/josefwaller/github-dash.git","ssh_url":"git@github.com:josefwaller/github-dash.git","clone_url":"https://github.com/josefwaller/github-dash.git","svn_url":"https://github.com/josefwaller/github-dash","homepage":null,"size":2421,"stargazers_count":0,"watchers_count":0,"language":"Ruby","has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"open_issues_count":0,"forks":0,"open_issues":0,"watchers":0,"default_branch":"master","network_count":0,"subscribers_count":1}'
+    http_version: 
+  recorded_at: Mon, 21 Aug 2017 23:09:52 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/josefwaller/github-dash/commits?per_page=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.7.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 21 Aug 2017 23:09:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '46'
+      X-Ratelimit-Reset:
+      - '1503358060'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      - Accept-Encoding
+      Etag:
+      - W/"18102a4902a1654aedf3e3b90a60efbc"
+      Last-Modified:
+      - Wed, 16 Aug 2017 18:35:45 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.030918'
+      X-Github-Request-Id:
+      - 1323:C23B:2DC2AF3:3873E3E:599B683E
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"sha":"4594daead285ec3f9ba7cf29c79d39942ca275c5","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T18:00:59Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T18:35:45Z"},"message":"Add
+        more colors to interface\n\nAdd more colors to `github-dash repo REPO_NAME`
+        and `github-dash\nfollowing`.","tree":{"sha":"e6145a397a84aa6facb5f00325361979e489b046","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/e6145a397a84aa6facb5f00325361979e489b046"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/4594daead285ec3f9ba7cf29c79d39942ca275c5","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/4594daead285ec3f9ba7cf29c79d39942ca275c5","html_url":"https://github.com/josefwaller/github-dash/commit/4594daead285ec3f9ba7cf29c79d39942ca275c5","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/4594daead285ec3f9ba7cf29c79d39942ca275c5/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"ddbc796209f72c6c27eb44b8ebc5da4e7a763b30","url":"https://api.github.com/repos/josefwaller/github-dash/commits/ddbc796209f72c6c27eb44b8ebc5da4e7a763b30","html_url":"https://github.com/josefwaller/github-dash/commit/ddbc796209f72c6c27eb44b8ebc5da4e7a763b30"}]},{"sha":"ddbc796209f72c6c27eb44b8ebc5da4e7a763b30","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T17:02:12Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T17:29:58Z"},"message":"Add
+        removing followed repositories\n\nAllow the user to unfollow a repository
+        using `github-dash remove_repo\nREPO_NAME`.","tree":{"sha":"052de2f63bdb7966b3bb1ff5410c418de0ae636f","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/052de2f63bdb7966b3bb1ff5410c418de0ae636f"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/ddbc796209f72c6c27eb44b8ebc5da4e7a763b30","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/ddbc796209f72c6c27eb44b8ebc5da4e7a763b30","html_url":"https://github.com/josefwaller/github-dash/commit/ddbc796209f72c6c27eb44b8ebc5da4e7a763b30","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/ddbc796209f72c6c27eb44b8ebc5da4e7a763b30/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"55749b23c98b4a93e907bd3ad3cd87fc3b6f13e0","url":"https://api.github.com/repos/josefwaller/github-dash/commits/55749b23c98b4a93e907bd3ad3cd87fc3b6f13e0","html_url":"https://github.com/josefwaller/github-dash/commit/55749b23c98b4a93e907bd3ad3cd87fc3b6f13e0"}]},{"sha":"55749b23c98b4a93e907bd3ad3cd87fc3b6f13e0","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-14T21:48:23Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T17:29:58Z"},"message":"Add
+        listing followed repositories\n\nAllow the user to see the status of their
+        followed repositories in the\nlast week by running `github-dash following`.","tree":{"sha":"dbf252945ba6295f02285cf256d356d3db5d1106","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/dbf252945ba6295f02285cf256d356d3db5d1106"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/55749b23c98b4a93e907bd3ad3cd87fc3b6f13e0","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/55749b23c98b4a93e907bd3ad3cd87fc3b6f13e0","html_url":"https://github.com/josefwaller/github-dash/commit/55749b23c98b4a93e907bd3ad3cd87fc3b6f13e0","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/55749b23c98b4a93e907bd3ad3cd87fc3b6f13e0/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"bb06b4a080ebc5b8a327e25e4159f4666783c989","url":"https://api.github.com/repos/josefwaller/github-dash/commits/bb06b4a080ebc5b8a327e25e4159f4666783c989","html_url":"https://github.com/josefwaller/github-dash/commit/bb06b4a080ebc5b8a327e25e4159f4666783c989"}]},{"sha":"bb06b4a080ebc5b8a327e25e4159f4666783c989","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-14T20:20:11Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T17:29:58Z"},"message":"Allow
+        the user to record certain repositories to be followed\n\nAdd `GithubDash::CLI.add_repo`,
+        which adds a repository to a list in\n`~/home/.github_dash/repositories.txt`.","tree":{"sha":"df81e173ceb5ab9cbad8725a620d8c1e0266acb1","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/df81e173ceb5ab9cbad8725a620d8c1e0266acb1"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/bb06b4a080ebc5b8a327e25e4159f4666783c989","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/bb06b4a080ebc5b8a327e25e4159f4666783c989","html_url":"https://github.com/josefwaller/github-dash/commit/bb06b4a080ebc5b8a327e25e4159f4666783c989","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/bb06b4a080ebc5b8a327e25e4159f4666783c989/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"84d2626b4c6a67402f48f6367f2683c91a4d839f","url":"https://api.github.com/repos/josefwaller/github-dash/commits/84d2626b4c6a67402f48f6367f2683c91a4d839f","html_url":"https://github.com/josefwaller/github-dash/commit/84d2626b4c6a67402f48f6367f2683c91a4d839f"}]},{"sha":"84d2626b4c6a67402f48f6367f2683c91a4d839f","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-14T20:05:50Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T17:29:58Z"},"message":"Make
+        sure repositories exists when fetching them\n\nRaise an `ArgumentError` if
+        `GithubDash::Repository.new` is passed an\ninvalid repository name.","tree":{"sha":"9c3518aa713baaefa02a10b99a1ff995f7a4bc8a","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/9c3518aa713baaefa02a10b99a1ff995f7a4bc8a"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/84d2626b4c6a67402f48f6367f2683c91a4d839f","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/84d2626b4c6a67402f48f6367f2683c91a4d839f","html_url":"https://github.com/josefwaller/github-dash/commit/84d2626b4c6a67402f48f6367f2683c91a4d839f","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/84d2626b4c6a67402f48f6367f2683c91a4d839f/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"85d2bd11bbc37b9c8c6a56be7b19b050bd7ad88a","url":"https://api.github.com/repos/josefwaller/github-dash/commits/85d2bd11bbc37b9c8c6a56be7b19b050bd7ad88a","html_url":"https://github.com/josefwaller/github-dash/commit/85d2bd11bbc37b9c8c6a56be7b19b050bd7ad88a"}]},{"sha":"85d2bd11bbc37b9c8c6a56be7b19b050bd7ad88a","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-14T16:36:16Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T17:29:58Z"},"message":"Add
+        days flag to command line interface\n\nAllow the user to designate the number
+        of days they want to see the\ncommits from with the `-d` flag.","tree":{"sha":"05ea330cf8a590a0ceb23484367466c3cb72b93b","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/05ea330cf8a590a0ceb23484367466c3cb72b93b"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/85d2bd11bbc37b9c8c6a56be7b19b050bd7ad88a","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/85d2bd11bbc37b9c8c6a56be7b19b050bd7ad88a","html_url":"https://github.com/josefwaller/github-dash/commit/85d2bd11bbc37b9c8c6a56be7b19b050bd7ad88a","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/85d2bd11bbc37b9c8c6a56be7b19b050bd7ad88a/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"5d3311552a07e1cba8d8ecf77d2802d3e19e413d","url":"https://api.github.com/repos/josefwaller/github-dash/commits/5d3311552a07e1cba8d8ecf77d2802d3e19e413d","html_url":"https://github.com/josefwaller/github-dash/commit/5d3311552a07e1cba8d8ecf77d2802d3e19e413d"}]},{"sha":"5d3311552a07e1cba8d8ecf77d2802d3e19e413d","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-11T20:26:27Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-16T17:29:55Z"},"message":"Add
+        command line interface\n\nShow a repo''s commits and PRs from the last week
+        when `bundle exec\ngit_dash repo [name]` is ran.","tree":{"sha":"aa9479b49e40b3ed997f0af74d92c0df108399e9","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/aa9479b49e40b3ed997f0af74d92c0df108399e9"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/5d3311552a07e1cba8d8ecf77d2802d3e19e413d","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/5d3311552a07e1cba8d8ecf77d2802d3e19e413d","html_url":"https://github.com/josefwaller/github-dash/commit/5d3311552a07e1cba8d8ecf77d2802d3e19e413d","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/5d3311552a07e1cba8d8ecf77d2802d3e19e413d/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"43d12491eefa40ee5ebc4d2c24d821c11da8c0b7","url":"https://api.github.com/repos/josefwaller/github-dash/commits/43d12491eefa40ee5ebc4d2c24d821c11da8c0b7","html_url":"https://github.com/josefwaller/github-dash/commit/43d12491eefa40ee5ebc4d2c24d821c11da8c0b7"}]},{"sha":"43d12491eefa40ee5ebc4d2c24d821c11da8c0b7","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-10T20:43:48Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-15T15:54:22Z"},"message":"Add
+        fetching commits\n\nAdd `GithubDashRepository.fetch_commits`, which fetches
+        commits from a\ncertain time period.","tree":{"sha":"0101c2d235d71c1d9cda972dcd8145e9a94a4a72","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/0101c2d235d71c1d9cda972dcd8145e9a94a4a72"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/43d12491eefa40ee5ebc4d2c24d821c11da8c0b7","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/43d12491eefa40ee5ebc4d2c24d821c11da8c0b7","html_url":"https://github.com/josefwaller/github-dash/commit/43d12491eefa40ee5ebc4d2c24d821c11da8c0b7","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/43d12491eefa40ee5ebc4d2c24d821c11da8c0b7/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"4810f10688af9f2e96e74e601b968a8dabfeb9c7","url":"https://api.github.com/repos/josefwaller/github-dash/commits/4810f10688af9f2e96e74e601b968a8dabfeb9c7","html_url":"https://github.com/josefwaller/github-dash/commit/4810f10688af9f2e96e74e601b968a8dabfeb9c7"}]},{"sha":"4810f10688af9f2e96e74e601b968a8dabfeb9c7","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-10T18:56:17Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-15T15:54:21Z"},"message":"Add
+        fetching pull requests within a certain period\n\nAdd `GithubDashRepository.pull_requests`,
+        which takes a certain number\nof days and returns all pull requests make within
+        than nubmer of days.\nEx: `GithubDashRepository.pull_requests(4)` would return
+        all PRs made\nwithin 4 days. Limited to 100 PRs by default.","tree":{"sha":"3e9255df6320e8a4fe41fe1b93dd347eca2e4409","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/3e9255df6320e8a4fe41fe1b93dd347eca2e4409"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/4810f10688af9f2e96e74e601b968a8dabfeb9c7","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/4810f10688af9f2e96e74e601b968a8dabfeb9c7","html_url":"https://github.com/josefwaller/github-dash/commit/4810f10688af9f2e96e74e601b968a8dabfeb9c7","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/4810f10688af9f2e96e74e601b968a8dabfeb9c7/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"73c0c13fc59493095f902ae82767a1207d13f02d","url":"https://api.github.com/repos/josefwaller/github-dash/commits/73c0c13fc59493095f902ae82767a1207d13f02d","html_url":"https://github.com/josefwaller/github-dash/commit/73c0c13fc59493095f902ae82767a1207d13f02d"}]},{"sha":"73c0c13fc59493095f902ae82767a1207d13f02d","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-10T18:20:54Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-10T22:33:32Z"},"message":"Add
+        repository fetching\n\nAdd `GithubDash::fetch_repository`, which fetches a
+        repository and provides the\ndata in a `GithubDash::Repository` object, of
+        which the raw data is\navailable at `GithubDash::Repository.data`.","tree":{"sha":"c8d32271be1309ebee103e2ccdaa9779f713ad20","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/c8d32271be1309ebee103e2ccdaa9779f713ad20"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/73c0c13fc59493095f902ae82767a1207d13f02d","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/73c0c13fc59493095f902ae82767a1207d13f02d","html_url":"https://github.com/josefwaller/github-dash/commit/73c0c13fc59493095f902ae82767a1207d13f02d","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/73c0c13fc59493095f902ae82767a1207d13f02d/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[{"sha":"9a053b44224ae29e4894ee81a3f165e81a9cfaa1","url":"https://api.github.com/repos/josefwaller/github-dash/commits/9a053b44224ae29e4894ee81a3f165e81a9cfaa1","html_url":"https://github.com/josefwaller/github-dash/commit/9a053b44224ae29e4894ee81a3f165e81a9cfaa1"}]},{"sha":"9a053b44224ae29e4894ee81a3f165e81a9cfaa1","commit":{"author":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-10T16:31:20Z"},"committer":{"name":"Josef
+        Waller","email":"josef@siriusapplications.com","date":"2017-08-10T16:31:20Z"},"message":"Initial
+        Commit","tree":{"sha":"f3456074e916d474562f529e7c54a20cf961131b","url":"https://api.github.com/repos/josefwaller/github-dash/git/trees/f3456074e916d474562f529e7c54a20cf961131b"},"url":"https://api.github.com/repos/josefwaller/github-dash/git/commits/9a053b44224ae29e4894ee81a3f165e81a9cfaa1","comment_count":0},"url":"https://api.github.com/repos/josefwaller/github-dash/commits/9a053b44224ae29e4894ee81a3f165e81a9cfaa1","html_url":"https://github.com/josefwaller/github-dash/commit/9a053b44224ae29e4894ee81a3f165e81a9cfaa1","comments_url":"https://api.github.com/repos/josefwaller/github-dash/commits/9a053b44224ae29e4894ee81a3f165e81a9cfaa1/comments","author":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"committer":{"login":"josefwaller","id":5296849,"avatar_url":"https://avatars0.githubusercontent.com/u/5296849?v=4","gravatar_id":"","url":"https://api.github.com/users/josefwaller","html_url":"https://github.com/josefwaller","followers_url":"https://api.github.com/users/josefwaller/followers","following_url":"https://api.github.com/users/josefwaller/following{/other_user}","gists_url":"https://api.github.com/users/josefwaller/gists{/gist_id}","starred_url":"https://api.github.com/users/josefwaller/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/josefwaller/subscriptions","organizations_url":"https://api.github.com/users/josefwaller/orgs","repos_url":"https://api.github.com/users/josefwaller/repos","events_url":"https://api.github.com/users/josefwaller/events{/privacy}","received_events_url":"https://api.github.com/users/josefwaller/received_events","type":"User","site_admin":false},"parents":[]}]'
+    http_version: 
+  recorded_at: Mon, 21 Aug 2017 23:09:53 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/josefwaller/github-dash/pulls?per_page=100
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.7.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 21 Aug 2017 23:09:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2'
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '45'
+      X-Ratelimit-Reset:
+      - '1503358060'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      - Accept-Encoding
+      Etag:
+      - '"aacc6f617e4d9cd3fbca87b8d3748d98"'
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.025188'
+      X-Github-Request-Id:
+      - 132D:C23B:2DC2B2F:3873E7F:599B683F
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: 
+  recorded_at: Mon, 21 Aug 2017 23:09:53 GMT
+recorded_with: VCR 3.0.3

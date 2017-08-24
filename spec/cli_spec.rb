@@ -19,8 +19,23 @@ RSpec.describe GithubDash::CLI do
 
   it "logs repo information" do
     VCR.use_cassette :pycatan do
+      subject.options = {days: 7}
       subject.repo "josefwaller/pycatan"
       expect(@out.string).to include("josefwaller/PyCatan")
+    end
+  end
+  it "uses the days option" do
+    VCR.use_cassette :githubdash do
+      subject.options = {days: 10}
+      subject.repo "josefwaller/github-dash"
+      expect(@out.string).to include("Commits from the last 10 days")
+    end
+  end
+  it "uses day with singular days" do
+    VCR.use_cassette :githubdash do
+      subject.options = {days: 1}
+      subject.repo "josefwaller/github-dash"
+      expect(@out.string).to include("Commits from the last 1 day")
     end
   end
 end
