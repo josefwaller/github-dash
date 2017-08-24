@@ -22,6 +22,8 @@ RSpec.describe GithubDash do
     before(:all) do
       VCR.insert_cassette "rails", :record => :new_episodes
       @repo = GithubDash::fetch_repository "rails/rails"
+      @repo.update_commits
+      @repo.update_pull_requests
     end
     after(:all) do
       VCR.eject_cassette "rails"
@@ -48,10 +50,10 @@ RSpec.describe GithubDash do
       expect(prs.length).to eq(100)
     end
     it "limits the number of PRs when given a limit" do
-      prs = @repo.get_pull_requests(days=100, up_to=25)
+      @repo.update_pull_requests 25
+      prs = @repo.get_pull_requests(days=100)
       expect(prs.length).to eq(25)
     end
-
     it "gets all commits in the last day" do
       commits = @repo.get_commits(days=1)
       expect(commits.length).to eq(0)
@@ -69,7 +71,8 @@ RSpec.describe GithubDash do
       expect(commits.length).to eq(100)
     end
     it "limits the number of commits when given a limit" do
-      commits = @repo.get_commits(days=100, up_to=25)
+      @repo.update_commits 25
+      commits = @repo.get_commits(days=100)
       expect(commits.length).to eq(25)
     end
   end

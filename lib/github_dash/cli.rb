@@ -89,6 +89,8 @@ module GithubDash
         repos = {}
         contents.split("\n").each do |r|
           repos[r] = GithubDash::fetch_repository r
+          repos.fetch(r).update_commits
+          repos.fetch(r).update_pull_requests
         end
         loop do
           begin
@@ -123,6 +125,8 @@ module GithubDash
     desc "repo REPO_NAME", "Logs a bunch of information about a repository"
     def repo(name)
       repo = GithubDash::fetch_repository(name)
+      repo.update_commits
+      repo.update_pull_requests
       @hl.say "=== <%= color('#{repo.data.full_name}', YELLOW) %> ==="
       @hl.say "=============================="
       @hl.say "Commits from the last <%= color('#{options[:days]}', GREEN) %> day#{"s" if options[:days] > 1}."
