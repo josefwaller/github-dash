@@ -7,6 +7,8 @@ RSpec.describe GithubDash::CLI do
   before :each do
     # Mock home dir
     ENV['HOME'] = File.expand_path "./tmp_home/"
+    subject.create_settings_dir
+    FileUtils.touch subject.repos_file_path
 
     # Capture output from Thor
     @out = StringIO.new
@@ -65,5 +67,17 @@ RSpec.describe GithubDash::CLI do
     end
     expect(@out.string).to include "josefwaller/PyCatan"
     expect(@out.string).to include "josefwaller/github-dash"
+  end
+  it "removes repositories with remove_repo" do
+    VCR.use_cassette :pycatan do
+      subject.add_repo "josefwaller/pycatan"
+      subject.remove_repo "josefwaller/pycatan"
+    end
+    expect(@out.string).to include "Removed josefwaller/pycatan"
+  end
+  it "warns the user if they try to remove a repository they are not following" do
+    subject.remove_repo "josefwaller/pycatan"
+    expect(@out.string).to include "Could not remove josefwaller/pycatan"
+    expect(@out.string).to include "Not following"
   end
 end

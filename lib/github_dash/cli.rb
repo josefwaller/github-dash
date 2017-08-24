@@ -40,6 +40,32 @@ module GithubDash
       end
     end
 
+    desc "remove_repo REPO_NAME", "Removes a repository from the 'followed repositories' list"
+    def remove_repo(name)
+
+      create_settings_dir
+
+      # Load the currently followed repos
+      contents = File.read repos_file_path
+
+      # Remove repos that match the repo to be removed
+      removed_repo = false
+      lines = contents.gsub(/\r\n/, "\n").split("\n").select do |line|
+        removed_repo = true unless line.downcase != name.downcase
+        !removed_repo
+      end
+
+      # Save new following
+      File.write repos_file_path, lines.join("\n")
+
+      # Tell the user whether it removed a repo or not
+      if removed_repo
+        @hl.say "Removed #{name.downcase}."
+      else
+        @hl.say "Could not remove #{name.downcase}. Not following"
+      end
+    end
+
     desc "following", "Show all the repopsitories the user is following"
     def following
 
