@@ -11,13 +11,14 @@ module GithubDash
     def initialize(*args)
       super
       @hl = HighLine.new
+      @client = nil
     end
 
     desc "add_repo REPO_NAME", "Adds a repository to the 'followed repositories' list"
     def add_repo(name)
 
       # Make sure the repository exists in github
-      repo = GithubDash::fetch_repository(name)
+      repo = GithubDash::fetch_repository(name, get_client)
 
       # Get the filepath to the followed repos file
       create_settings_dir
@@ -67,6 +68,30 @@ module GithubDash
       end
     end
 
+    desc "login", "Log into github to allow access to private repositories and increase API limit."
+    def login
+
+      # Check user is not already logged in
+      client = get_client
+      if client.nil?
+
+        # Prompt for username/password
+        username = @hl.ask("Enter username: ")
+        password = @hl.ask("Enter password: ") {|q| q.echo = "X"}
+
+        # Create new token
+        client = Octokit::Client.new :login => username, :password => password
+        token = client.create_authorization(:note => "github-dash token").token
+
+        # Save token
+        File.write "#{ENV['HOME']}/.github_dash/token.txt", token
+
+        @hl.say "Logged in as #{client.login}"
+      else
+        @hl.say "Already logged in as #{client.login}"
+      end
+    end
+
     desc "following", "Show all the repopsitories the user is following"
     option :liveupdate, :aliases => [:l], :type => :boolean, :default => false
     def following
@@ -88,9 +113,9 @@ module GithubDash
       else
         repos = {}
         contents.split("\n").each do |r|
-          repos[r] = GithubDash::fetch_repository r
-          repos.fetch(r).update_commits
-          repos.fetch(r).update_pull_requests
+          repos[r] = GithubDash::fetch_repository r, get_client
+          repos.fetch(r).update_commits 100, get_client
+          repos.fetch(r).update_pull_requests 100, get_client
         end
         loop do
           begin
@@ -124,9 +149,11 @@ module GithubDash
     option :days, :aliases => [:d], :type => :numeric, :default => 7
     desc "repo REPO_NAME", "Logs a bunch of information about a repository"
     def repo(name)
-      repo = GithubDash::fetch_repository(name)
-      repo.update_commits
-      repo.update_pull_requests
+      # Fetch repo information
+      client = get_client
+      repo = GithubDash::fetch_repository(name, client)
+      repo.update_commits(100, client)
+      repo.update_pull_requests(100, client)
       @hl.say "=== <%= color('#{repo.data.full_name}', YELLOW) %> ==="
       @hl.say "=============================="
       @hl.say "Commits from the last <%= color('#{options[:days]}', GREEN) %> day#{"s" if options[:days] > 1}."
@@ -156,6 +183,19 @@ module GithubDash
       # Get the path to the file containing all followed repos' names
       def repos_file_path
         "#{ENV['HOME']}/.github_dash/repositories.txt"
+      end
+
+      # Get the currently logged in client from the saved token
+      #   otherwise returns nil
+      def get_client
+        # Check if there is already a token
+        client = nil
+        # Check if the file exists
+        if File.file? "#{ENV['HOME']}/.github_dash/token.txt"
+          token = File.read "#{ENV['HOME']}/.github_dash/token.txt"
+          client = Octokit::Client.new :scopes => ["repo"], :access_token => token
+        end
+        client
       end
 
       # Minor helper method for setting string size

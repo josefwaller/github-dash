@@ -4,9 +4,14 @@ require 'pp'
 module GithubDash
   class Repository
     # Fetch a new repository
-    def initialize(repository_url)
+    def initialize(repository_url, client = nil)
       begin
-        @repo_data = Octokit.repository(repository_url)
+        # Use client if logged in
+        if client
+          @repo_data = client.repository(repository_url)
+        else
+          @repo_data = Octokit.repository repository_url
+        end
       rescue Octokit::NotFound
         raise ArgumentError, "Could not find #{repository_url}."
       end
@@ -18,8 +23,9 @@ module GithubDash
     end
 
     # Update cached PR data
-    def update_pull_requests(up_to=100)
-      @pull_requests = Octokit.pull_requests(@repo_data.full_name, :per_page => up_to)
+    def update_pull_requests(up_to=100, client = nil)
+      client = Octokit unless client
+      @pull_requests = client.pull_requests(@repo_data.full_name, :per_page => up_to)
     end
 
     # Get the pull requests opened in the last so many days
@@ -31,8 +37,9 @@ module GithubDash
     end
 
     # Update cached commits
-    def update_commits(up_to=100)
-      @commits = Octokit.commits(@repo_data.full_name, :per_page => up_to)
+    def update_commits(up_to=100, client = nil)
+      client = Octokit unless client
+      @commits = client.commits(@repo_data.full_name, :per_page => up_to)
     end
 
     # Get all commits in a certain time period

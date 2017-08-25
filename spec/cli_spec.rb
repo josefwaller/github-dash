@@ -84,4 +84,45 @@ RSpec.describe GithubDash::CLI do
     expect(output).to include "could not remove josefwaller/pycatan"
     expect(output).to include "not following"
   end
+
+  describe "Authentication" do
+    let(:client) { instance_double(Octokit::Client) }
+    let(:token_resource) { double(Sawyer::Resource) }
+    before(:each) do
+      @filename = "#{ENV['HOME']}/.github_dash/token.txt"
+      ENV['GITHUB_DASH_TOKEN'] ||= "ThisIsAnExampleGithubApiKey"
+      ENV['GITHUB_PASSWORD'] ||= "MyExamplePassword"
+      allow(token_resource).to receive(:token).and_return(ENV['GITHUB_DASH_TOKEN'])
+    end
+
+    it "generates a token when needed" do
+      allow(File).to receive(:write).with(@filename, ENV['GITHUB_DASH_TOKEN'])
+      # Stub Octokit::Client for authorization testing
+      allow(Octokit::Client).to receive(:new).and_return(client)
+      allow(client).to receive(:create_authorization).and_return(token_resource)
+      allow(client).to receive(:login).and_return("mygithubusername")
+      # Add input
+      @in << "josefwaller\n"
+      @in << "#{ENV['GITHUB_PASSWORD']}\n"
+      @in.rewind
+      VCR.use_cassette :exampleprivate do
+        subject.login
+      end
+      expect(output).to include("logged in")
+      expect(File).to have_received(:write).with(@filename, ENV['GITHUB_DASH_TOKEN'])
+    end
+
+    it "allows access to private repositories when given a token" do
+      allow(File).to receive(:read).with(@filename).and_return(ENV['GITHUB_DASH_TOKEN'])
+      allow(File).to receive(:file?).with(@filename).and_return(true)
+
+      VCR.use_cassette :exampleprivate do
+        subject.options = {:days => 7}
+        subject.repo "josefwaller/exampleprivaterepository"
+        expect(output).not_to include("argument error")
+        expect(output).to include("josefwaller/exampleprivaterepository")
+        expect(output).to include("commits from the last 7 days")
+      end
+    end
+  end
 end
