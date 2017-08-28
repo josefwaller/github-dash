@@ -121,14 +121,31 @@ module GithubDash
           begin
             # Gather output from each repo
             all_output = ""
+
+            # Add headers
+            all_output += "| "
+            all_output += set_str_size("Repository", 30)
+            all_output += " | "
+            all_output += set_str_size("PRs in the last week", 25)
+            all_output += " | "
+            all_output += set_str_size("Commits in the last week", 35)
+            all_output += " |"
+            all_output += "\n"
+            all_output += "| "
+            all_output += "-" * (30 + 25 + 35 + 6)
+            all_output += " |"
+            all_output += "\n"
             repos.each_with_index do |(r, val), i|
-              output = ""
+              repos.fetch(r).update_commits 100, get_client
+              repos.fetch(r).update_pull_requests 100, get_client
+
+              output = "| "
               output += "<%= color('#{set_str_size(val.data.full_name, 30)}', YELLOW) %>"
               output += " | "
               output += "<%= color('#{set_str_size("#{val.get_pull_requests.size} PRs in the last week", 25)}', GREEN) %>"
               output += " | "
               output += "<%= color('#{set_str_size("#{val.get_commits.size} commits in the last week", 35)}', LIGHT_BLUE) %>"
-              output += "\n"
+              output += " |\n"
               all_output += output
             end
             if options[:liveupdate]
