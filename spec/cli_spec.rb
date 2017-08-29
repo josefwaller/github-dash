@@ -1,20 +1,17 @@
 require "spec_helper"
 require "fileutils"
 require "github_dash/cli"
+require "sequel"
 
 RSpec.describe GithubDash::CLI do
 
   before :each do
-    # Mock home dir
-    ENV['HOME'] = File.expand_path "./tmp_home/"
-
     # Capture output from Thor
     @out = StringIO.new
     @in = StringIO.new
     subject.set_hl HighLine.new(@in, @out)
-  end
-  after :each do
-    FileUtils.rm_r "./tmp_home/" if File.directory? "./tmp_home"
+
+    allow(Sequel).to receive(:sqlite).and_return(Sequel.sqlite)
   end
 
   def output
@@ -86,14 +83,12 @@ RSpec.describe GithubDash::CLI do
   describe "Authentication" do
     let(:token_resource) { double(Sawyer::Resource) }
     before(:each) do
-      @filename = "#{ENV['HOME']}/.github_dash/token.txt"
       ENV['GITHUB_DASH_TOKEN'] ||= "ThisIsAnExampleGithubApiKey"
       ENV['GITHUB_PASSWORD'] ||= "MyExamplePassword"
       allow(token_resource).to receive(:token).and_return(ENV['GITHUB_DASH_TOKEN'])
     end
 
     it "generates a token when needed" do
-      allow(File).to receive(:write).with(@filename, ENV['GITHUB_DASH_TOKEN'])
       # Stub Octokit::Client for authorization testing
       client = instance_double(Octokit::Client)
       allow(client).to receive(:create_authorization).and_return(token_resource)
@@ -107,13 +102,9 @@ RSpec.describe GithubDash::CLI do
         subject.login
       end
       expect(output).to include("added josefwaller")
-      expect(File).to have_received(:write).with(@filename, ENV['GITHUB_DASH_TOKEN'])
     end
 
     it "allows access to private repositories when given a token" do
-      allow(File).to receive(:read).with(@filename).and_return(ENV['GITHUB_DASH_TOKEN'])
-      allow(File).to receive(:file?).with(@filename).and_return(true)
-
       VCR.use_cassette :exampleprivate do
         subject.options = {:days => 7}
         subject.repo "josefwaller/exampleprivaterepository"

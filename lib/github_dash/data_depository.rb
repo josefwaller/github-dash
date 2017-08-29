@@ -1,4 +1,5 @@
 require "github_dash"
+require "sequel"
 
 module GithubDash
 
@@ -8,94 +9,78 @@ module GithubDash
 
     # Save a repo name in the following list
     def self.add_repo(repo_name)
-      create_settings_dir
-
-      # Open it
-      File.open repos_file_path, 'a+' do |f|
-        # Read all contents and make sure the file doesn't already
-        #   contain this repository
-        contents = f.read
-        contents.gsub(/\r\n?/, "\n")
-        contents.each_line do |l|
-          if l.gsub(/\n/, "") == repo_name
-            raise ArgumentError, "Tried to follow a repository that was already followed"
-          end
-        end
-
-        # Add repository to file
-        f.puts repo_name
+      # Check the repo is not already followed
+      if get_db[:repos].where(:name => repo_name.downcase).all.count > 0
+        raise ArgumentError, "Tried to follow a repository that was already followed!"
       end
+
+      # Add repository to database
+      get_db[:repos].insert(:name => repo_name.downcase)
     end
 
     # Remove a repository from a list of followed repositories
     def self.remove_repo(repo_name)
-      create_settings_dir
-
-      # Load the currently followed repos
-      contents = File.read repos_file_path
-
-      # Go through each repo and remove the designated repo
-      contents = contents.gsub(/\r\n/, "\n").split("\n").reject! do |line|
-        line.downcase == repo_name.downcase
+      # Remove the repository
+      if get_db[:repos].where(:name => repo_name.downcase).delete == 0
+        # `delete` will return the number of entries deleted
+        #   So if none were deleted, raise an error
+        raise ArgumentError, "Tried removing a repository that was not followed!"
       end
-
-      # reject! will return nil if it did not change the array
-      if contents.nil?
-        raise ArgumentError, "Tried removing a repository that was already followed!"
-      end
-
-      # Save new following
-      File.write repos_file_path, contents.join("\n")
-
     end
 
     # Get an array of the names of followed repositories
     def self.get_following
-      # Read the repos file
-      file = File.read repos_file_path
-
-      # Split the contents by a linebreak and return
-      file.split("\n")
+      # Create an arrau of just the repo's names
+      get_db[:repos].all.map do |r|
+        r[:name]
+      end
     end
 
     # Save a token to be used for logging in
     def self.save_token(token)
-      # Save token
-      File.write "#{ENV['HOME']}/.github_dash/token.txt", token
+      # Remove any previous tokens
+      get_db[:tokens].delete
+
+      # Add this token
+      get_db[:tokens].insert(:token => token)
     end
 
     # Get the github API token
     def self.get_token
-      begin
-        # Return the contents of the token file
-        File.read "#{ENV['HOME']}/.github_dash/token.txt"
-      rescue Errno::ENOENT
-        # Return nil if the file doesn't exist
-        nil
-      end
+      # Will return nil if empty
+      return nil if get_db[:tokens].first.nil?
+
+      # Return the actual token
+      get_db[:tokens].first[:token]
     end
 
-    # Get the path to the file containing all followed repos' names
-    def self.repos_file_path
-      "#{ENV['HOME']}/.github_dash/repositories.txt"
-    end
+    # Get the database from the .db file and creates
+    #   all tables unless they already exist
+    def self.get_db
 
-    # Create the settings directory, where all data files are kept
-    def self.create_settings_dir
-      # Get the directory name
-      dirname = File.dirname repos_file_path
+      # Does not load the database twice
+      unless class_variable_defined?(:@@db)
 
-      # Create it and parent folders if they don't exist
-      unless File.directory? dirname
-        FileUtils.mkdir_p dirname
+        @@db = Sequel.sqlite("#{ENV['HOME']}/.github_dash/data.db")
+
+        # Create the tables
+        #   Note: create_table? works the same as create_table,
+        #   except that it will not override an existing table
+        #   with the same name.
+        @@db.create_table? :repos do
+          primary_key :id
+          String :name
+        end
+
+        @@db.create_table? :tokens do
+          primary_key :id
+          String :token
+        end
       end
 
-      # Create an empty file if the file does not exist
-      unless File.file? repos_file_path
-        File.open(repos_file_path, "w").close
-      end
+      @@db
     end
 
-    private_class_method :create_settings_dir, :repos_file_path
+    private_class_method :get_db
   end
 end

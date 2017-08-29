@@ -39,4 +39,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "~> 0.19.4"
   spec.add_dependency "highline", "~> 1.7.8"
   spec.add_dependency "tty-cursor", "~> 0.5.0"
+  spec.add_dependency "sqlite3", "~> 1.3.13"
+  spec.add_dependency "sequel", "~> 4.49.0"
 end
