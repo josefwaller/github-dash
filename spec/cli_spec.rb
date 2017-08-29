@@ -1,5 +1,5 @@
 require "spec_helper"
-require 'fileutils'
+require "fileutils"
 require "github_dash/cli"
 
 RSpec.describe GithubDash::CLI do
@@ -7,8 +7,6 @@ RSpec.describe GithubDash::CLI do
   before :each do
     # Mock home dir
     ENV['HOME'] = File.expand_path "./tmp_home/"
-    subject.create_settings_dir
-    FileUtils.touch subject.repos_file_path
 
     # Capture output from Thor
     @out = StringIO.new
@@ -86,7 +84,6 @@ RSpec.describe GithubDash::CLI do
   end
 
   describe "Authentication" do
-    let(:client) { instance_double(Octokit::Client) }
     let(:token_resource) { double(Sawyer::Resource) }
     before(:each) do
       @filename = "#{ENV['HOME']}/.github_dash/token.txt"
@@ -98,9 +95,10 @@ RSpec.describe GithubDash::CLI do
     it "generates a token when needed" do
       allow(File).to receive(:write).with(@filename, ENV['GITHUB_DASH_TOKEN'])
       # Stub Octokit::Client for authorization testing
-      allow(Octokit::Client).to receive(:new).and_return(client)
+      client = instance_double(Octokit::Client)
       allow(client).to receive(:create_authorization).and_return(token_resource)
       allow(client).to receive(:login).and_return("mygithubusername")
+      allow(Octokit::Client).to receive(:new).and_return(client)
       # Add input
       @in << "josefwaller\n"
       @in << "#{ENV['GITHUB_PASSWORD']}\n"
@@ -108,7 +106,7 @@ RSpec.describe GithubDash::CLI do
       VCR.use_cassette :exampleprivate do
         subject.login
       end
-      expect(output).to include("logged in")
+      expect(output).to include("added josefwaller")
       expect(File).to have_received(:write).with(@filename, ENV['GITHUB_DASH_TOKEN'])
     end
 
