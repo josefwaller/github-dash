@@ -52,6 +52,12 @@ RSpec.describe GithubDash::CLI do
     end
     expect(output).to include "repository is already followed"
   end
+  it "doesn't add a repository that does not exist" do
+    VCR.use_cassette :not_exist, :record => :new_episodes do
+      subject.add_repo "doesnot/exist"
+    end
+    expect(output).to include "could not find doesnot/exist on github"
+  end
   it "logs following repositories" do
     VCR.use_cassette :pycatan do
       subject.add_repo "josefwaller/pycatan"

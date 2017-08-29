@@ -5,16 +5,12 @@ module GithubDash
   class Repository
     # Fetch a new repository
     def initialize(repository_url)
-      begin
-        # Use client if logged in
-        client = GithubDash::get_client
-        if client
-          @repo_data = client.repository(repository_url)
-        else
-          @repo_data = Octokit.repository repository_url
-        end
-      rescue Octokit::NotFound
-        raise ArgumentError, "Could not find #{repository_url}."
+      # Use client if logged in
+      client = GithubDash::get_client
+      if client
+        @repo_data = client.repository(repository_url)
+      else
+        @repo_data = Octokit.repository repository_url
       end
     end
 

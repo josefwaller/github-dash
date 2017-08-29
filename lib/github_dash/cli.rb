@@ -21,6 +21,8 @@ module GithubDash
         @hl.say "Added #{name} to followed repositories."
       rescue ArgumentError
         @hl.say "Repository is already followed!"
+      rescue Octokit::NotFound
+        @hl.say "Could not find #{name} on github. Do you need to log in first?"
       end
     end
 

@@ -12,9 +12,9 @@ RSpec.describe GithubDash do
     end
   end
 
-  it "raises an ArgumentError if the repository does not exist" do
+  it "raises an Octokit::NotFound error if the repository does not exist" do
     VCR.use_cassette "not_exist" do
-      expect{GithubDash::fetch_repository "not-exist/does-not-exist"}.to raise_error(ArgumentError)
+      expect{GithubDash::fetch_repository "not-exist/does-not-exist"}.to raise_error(Octokit::NotFound)
     end
   end
 
