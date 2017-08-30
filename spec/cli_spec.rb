@@ -53,6 +53,9 @@ RSpec.describe GithubDash::CLI do
     expect(output).to include "repository is already followed"
   end
   it "doesn't add a repository that does not exist" do
+    # Out: Do you want to try with a different token? [Y/n]
+    @in << "n"
+    @in.rewind
     VCR.use_cassette :not_exist, :record => :new_episodes do
       subject.add_repo "doesnot/exist"
     end

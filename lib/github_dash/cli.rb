@@ -16,13 +16,29 @@ module GithubDash
 
     desc "add_repo REPO_NAME", "Adds a repository to the 'followed repositories' list"
     def add_repo(name)
-      begin
-        GithubDash::add_repo_to_following(name)
-        @hl.say "Added #{name} to followed repositories."
-      rescue ArgumentError
-        @hl.say "Repository is already followed!"
-      rescue Octokit::NotFound
-        @hl.say "Could not find #{name} on github. Do you need to log in first?"
+      token = nil
+      loop do
+        begin
+          GithubDash::add_repo_to_following(name, token)
+          @hl.say "Added #{name} to followed repositories."
+          break
+        rescue ArgumentError
+          @hl.say "Repository is already followed!"
+          break
+        rescue Octokit::NotFound, Octokit::Unauthorized
+          @hl.say "Could not find #{name} on github using #{token}."
+          ans = @hl.ask "Do you want to try with a different token? [Y/n]"
+
+          break if ans.downcase != "y"
+
+          tokens = GithubDash::DataDepository.get_all_tokens
+          tokens.each_with_index do |t, i|
+            @hl.say "#{i + 1} - #{t}"
+          end
+
+          choice = @hl.ask "Which token do you want to use?"
+          token = tokens[Integer(choice) - 1]
+        end
       end
     end
 
