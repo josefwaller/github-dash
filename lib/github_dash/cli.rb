@@ -47,6 +47,12 @@ module GithubDash
       @hl.say "Added #{username}"
     end
 
+    desc "add_token TOKEN", "Save a token and set it to be used first for all repositories"
+    def add_token(token)
+      GithubDash::add_token(token)
+      @hl.say "Added #{token}"
+    end
+
     desc "following", "Show all the repopsitories the user is following"
     option :liveupdate, :aliases => [:l], :type => :boolean, :default => false
     def following

@@ -119,5 +119,10 @@ RSpec.describe GithubDash::CLI do
         expect(output).to include("commits from the last 7 days")
       end
     end
+
+    it "saves a token" do
+      subject.add_token "test_token"
+      expect(output).to include("added test_token")
+    end
   end
 end

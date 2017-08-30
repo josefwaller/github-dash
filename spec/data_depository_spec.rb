@@ -73,16 +73,27 @@ RSpec.describe GithubDash::DataDepository do
     end
   end
   describe "Tokens" do
+    let (:test_token) { "test_token" }
 
     it "saves a token" do
-      GithubDash::DataDepository.save_token("test_token")
+      GithubDash::DataDepository.save_token(test_token)
 
       expect(database[:tokens].all.count).to eq(1)
-      expect(database[:tokens].all[0][:token]).to eq("test_token")
+      expect(database[:tokens].all[0][:token]).to eq(test_token)
     end
     it "fetches a token" do
       init_example_db
       expect(GithubDash::DataDepository.get_token).to eq(ENV['GITHUB_DASH_TOKEN'])
+    end
+    it "fetches the token with the highest id" do
+      init_example_db
+      database[:tokens].insert(:token => test_token)
+      expect(GithubDash::DataDepository.get_token).to eq(test_token)
+    end
+    it "saves a new token with the highest id" do
+      init_example_db
+      GithubDash::DataDepository.save_token(test_token)
+      expect(database[:tokens].order(:id).last[:token]).to eq(test_token)
     end
   end
 end

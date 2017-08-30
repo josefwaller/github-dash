@@ -44,12 +44,13 @@ module GithubDash
 
     # Get the github API token
     def self.get_token
-      tokens = get_db[:tokens].all
+      tokens = get_db[:tokens].order(:id)
       # Will return nil if empty
       return nil if tokens.empty?
 
-      # Return the actual token
-      tokens.first[:token]
+      # Returns the token last added
+      #   i.e. the one with the highest ID
+      tokens.last[:token]
     end
 
     # Get the database from the .db file and creates

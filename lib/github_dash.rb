@@ -37,6 +37,11 @@ module GithubDash
     DataDepository.save_token(token)
   end
 
+  # Add a token and set it to be used first when fetching repositories
+  def self.add_token(token)
+    DataDepository.save_token(token)
+  end
+
   # Get either an Octokit::Client if a token has been saved,
   #   or nil if one hasn't.
   def self.get_client
