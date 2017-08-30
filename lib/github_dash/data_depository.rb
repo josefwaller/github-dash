@@ -38,20 +38,18 @@ module GithubDash
 
     # Save a token to be used for logging in
     def self.save_token(token)
-      # Remove any previous tokens
-      get_db[:tokens].delete
-
       # Add this token
       get_db[:tokens].insert(:token => token)
     end
 
     # Get the github API token
     def self.get_token
+      tokens = get_db[:tokens].all
       # Will return nil if empty
-      return nil if get_db[:tokens].first.nil?
+      return nil if tokens.empty?
 
       # Return the actual token
-      get_db[:tokens].first[:token]
+      tokens.first[:token]
     end
 
     # Get the database from the .db file and creates
