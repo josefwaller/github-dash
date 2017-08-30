@@ -48,14 +48,29 @@ module GithubDash
     end
 
     # Get the github API token
-    def self.get_token
+    def self.get_token(place_from_last = 0)
       tokens = get_db[:tokens].order(:id)
       # Will return nil if empty
-      return nil if tokens.empty?
+      return nil if tokens.empty? || place_from_last >= tokens.all.count
 
-      # Returns the token last added
-      #   i.e. the one with the highest ID
-      tokens.last[:token]
+      # Returns the token in the place from last specifiedl
+      tokens.all[- (place_from_last + 1)][:token]
+    end
+
+    # Get all the tokens saved
+    def self.get_all_tokens
+      get_db[:tokens].all.map do |t|
+        t[:token]
+      end
+    end
+
+    # Get the token for a certain repository
+    def self.get_token_for_repo(repo_name)
+      repo = get_db[:repos].where(:name => repo_name.downcase).first
+      return nil if repo.nil? || repo[:token_id].nil?
+      token_id = repo[:token_id]
+
+      get_db[:tokens].where(:id => token_id).first[:token]
     end
 
     # Get the database from the .db file and creates

@@ -107,10 +107,15 @@ RSpec.describe GithubDash::DataDepository do
       init_example_db
       expect(GithubDash::DataDepository.get_token).to eq(ENV['GITHUB_DASH_TOKEN'])
     end
-    it "fetches the token with the highest id" do
+    it "fetches the token with the highest id by default" do
       init_example_db
       database[:tokens].insert(:token => test_token)
       expect(GithubDash::DataDepository.get_token).to eq(test_token)
+    end
+    it "allows fetching the token which is a certain distance from the end" do
+      init_example_db
+      database[:tokens].insert(:token => test_token)
+      expect(GithubDash::DataDepository.get_token(1)).to eq(ENV['GITHUB_DASH_TOKEN'])
     end
     it "saves a new token with the highest id" do
       init_example_db

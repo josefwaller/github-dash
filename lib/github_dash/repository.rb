@@ -4,14 +4,9 @@ require 'pp'
 module GithubDash
   class Repository
     # Fetch a new repository
-    def initialize(repository_url)
+    def initialize(repo_name)
       # Use client if logged in
-      client = GithubDash::get_client
-      if client
-        @repo_data = client.repository(repository_url)
-      else
-        @repo_data = Octokit.repository repository_url
-      end
+      @repo_data = client_for(repo_name).repository(repo_name)
     end
 
     # Get the raw octokit data
@@ -21,9 +16,7 @@ module GithubDash
 
     # Update cached PR data
     def update_pull_requests(up_to=100)
-      client = GithubDash::get_client
-      client = Octokit if client.nil?
-      @pull_requests = client.pull_requests(@repo_data.full_name, :per_page => up_to)
+      @pull_requests = client_for.pull_requests(@repo_data.full_name, :per_page => up_to)
     end
 
     # Get the pull requests opened in the last so many days
@@ -36,9 +29,7 @@ module GithubDash
 
     # Update cached commits
     def update_commits(up_to=100)
-      client = GithubDash::get_client
-      client = Octokit if client.nil?
-      @commits = client.commits(@repo_data.full_name, :per_page => up_to)
+      @commits = client_for.commits(@repo_data.full_name, :per_page => up_to)
     end
 
     # Get all commits in a certain time period
@@ -49,6 +40,19 @@ module GithubDash
       @commits.select do |c|
         c.commit.author.date.to_date > Date.today - days
       end
+    end
+
+    # Get a client which can access certain repository
+    #   If passed without a pre_name parameter, assume that @repo_data has been
+    #   initialized, and get the name from that
+    def client_for(repo_name = nil)
+      repo_name ||= @repo_data.full_name
+      # Get the token
+      token = GithubDash::DataDepository.get_token_for_repo(repo_name)
+      # Use default client if the token is nil
+      Octokit if token.nil?
+      # Return new client
+      client = Octokit::Client.new(:access_token => token)
     end
   end
 end

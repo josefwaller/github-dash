@@ -10,10 +10,13 @@ module GithubDash
   end
 
   # Add a repository to the list of followed repositories
-  def self.add_repo_to_following(name)
-    # Make sure the repository exists in github
-    Repository.new(name)
-    DataDepository.add_repo name, DataDepository.get_token
+  def self.add_repo_to_following(name, token=nil)
+    token ||= DataDepository.get_token
+    # Check that the repository exists
+    client = Octokit::Client.new(:access_token => token)
+    client.repository name
+
+    DataDepository.add_repo name, token
   end
 
   # Remove a repository from the list of followed repositories
@@ -40,14 +43,5 @@ module GithubDash
   # Add a token and set it to be used first when fetching repositories
   def self.add_token(token)
     DataDepository.save_token(token)
-  end
-
-  # Get either an Octokit::Client if a token has been saved,
-  #   or nil if one hasn't.
-  def self.get_client
-    # Return nil if no token has been saved
-    nil if DataDepository.get_token.nil?
-    # Return new client
-    Octokit::Client.new(:access_token => DataDepository.get_token)
   end
 end

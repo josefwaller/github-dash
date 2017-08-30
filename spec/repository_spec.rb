@@ -2,6 +2,10 @@ require "spec_helper"
 
 RSpec.describe GithubDash::Repository do
 
+  before(:each) do
+    allow(GithubDash::DataDepository).to receive(:get_token_for_repo).and_return(nil)
+  end
+
   it "fetches a repository" do
     VCR.use_cassette :pycatan do
       GithubDash::Repository.new("josefwaller/pycatan")
