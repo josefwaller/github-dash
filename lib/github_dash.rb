@@ -31,7 +31,7 @@ module GithubDash
   def self.add_user(username, password)
     # Create new token
     client = Octokit::Client.new :login => username, :password => password
-    token = client.create_authorization(:note => "github-dash token").token
+    token = client.create_authorization(:scopes => ["repo"], :note => "github-dash token").token
 
     # Save it
     DataDepository.save_token(token)
