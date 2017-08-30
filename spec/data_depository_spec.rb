@@ -23,6 +23,7 @@ RSpec.describe GithubDash::DataDepository do
     database.create_table :repos do
       primary_key :id
       String :name
+      foreign_id :token_id
     end
 
     # Add example repositories
@@ -70,6 +71,27 @@ RSpec.describe GithubDash::DataDepository do
       init_example_db
 
       expect{GithubDash::DataDepository.add_repo("josefwaller/pycatan")}.to raise_error(ArgumentError)
+    end
+
+    it "saves a repository with the id of the token given" do
+      init_example_db
+
+      repo_one = "solidus/solidusio"
+      GithubDash::DataDepository.add_repo(repo_one, ENV['GITHUB_DASH_TOKEN'])
+      token_id = database[:tokens].where(:token => ENV['GITHUB_DASH_TOKEN']).first[:id]
+      expect(database[:repos].where(:name => repo_one).first[:token_id]).to eq(token_id)
+
+      repo_two = "django/django"
+      GithubDash::DataDepository.save_token("this_is_my_newest_token")
+      GithubDash::DataDepository.add_repo(repo_two, "this_is_my_newest_token")
+      token_id = database[:tokens].where(:token => "this_is_my_newest_token").first[:id]
+      expect(database[:repos].where(:name => repo_two).first[:token_id]).to eq(token_id)
+    end
+    it "saves a repository with token_id = nil by default" do
+      init_example_db
+
+      GithubDash::DataDepository.add_repo("django/django")
+      expect(database[:repos].where(:name => "django/django").first[:token_id]).to eq(nil)
     end
   end
   describe "Tokens" do

@@ -8,14 +8,19 @@ module GithubDash
   class DataDepository
 
     # Save a repo name in the following list
-    def self.add_repo(repo_name)
+    def self.add_repo(repo_name, token=nil)
       # Check the repo is not already followed
       if get_db[:repos].where(:name => repo_name.downcase).all.count > 0
         raise ArgumentError, "Tried to follow a repository that was already followed!"
       end
 
       # Add repository to database
-      get_db[:repos].insert(:name => repo_name.downcase)
+      if token.nil?
+        token_id = nil
+      else
+        token_id = get_db[:tokens].where(:token => token).first[:id]
+      end
+      get_db[:repos].insert(:name => repo_name.downcase, :token_id => token_id)
     end
 
     # Remove a repository from a list of followed repositories
@@ -69,6 +74,8 @@ module GithubDash
         @@db.create_table? :repos do
           primary_key :id
           String :name
+          # The ID of the token used to fetch this repo
+          foriegn_key :token_id
         end
 
         @@db.create_table? :tokens do

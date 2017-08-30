@@ -13,7 +13,7 @@ module GithubDash
   def self.add_repo_to_following(name)
     # Make sure the repository exists in github
     Repository.new(name)
-    DataDepository.add_repo name
+    DataDepository.add_repo name, DataDepository.get_token
   end
 
   # Remove a repository from the list of followed repositories
