@@ -36,6 +36,7 @@ RSpec.describe GithubDash::DataDepository do
     database.create_table :tokens do
       primary_key :id
       String :token
+      String :name
     end
 
     # Add example token
@@ -82,7 +83,7 @@ RSpec.describe GithubDash::DataDepository do
       expect(database[:repos].where(:name => repo_one).first[:token_id]).to eq(token_id)
 
       repo_two = "django/django"
-      GithubDash::DataDepository.save_token("this_is_my_newest_token")
+      GithubDash::DataDepository.save_token("this_is_my_newest_token", "New token name")
       GithubDash::DataDepository.add_repo(repo_two, "this_is_my_newest_token")
       token_id = database[:tokens].where(:token => "this_is_my_newest_token").first[:id]
       expect(database[:repos].where(:name => repo_two).first[:token_id]).to eq(token_id)
@@ -98,10 +99,11 @@ RSpec.describe GithubDash::DataDepository do
     let (:test_token) { "test_token" }
 
     it "saves a token" do
-      GithubDash::DataDepository.save_token(test_token)
+      GithubDash::DataDepository.save_token(test_token, "Test Token")
 
       expect(database[:tokens].all.count).to eq(1)
       expect(database[:tokens].all[0][:token]).to eq(test_token)
+      expect(database[:tokens].all[0][:name]).to eq("Test Token")
     end
     it "fetches a token" do
       init_example_db
@@ -119,7 +121,7 @@ RSpec.describe GithubDash::DataDepository do
     end
     it "saves a new token with the highest id" do
       init_example_db
-      GithubDash::DataDepository.save_token(test_token)
+      GithubDash::DataDepository.save_token(test_token, "Test token")
       expect(database[:tokens].order(:id).last[:token]).to eq(test_token)
     end
   end

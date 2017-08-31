@@ -42,9 +42,9 @@ module GithubDash
     end
 
     # Save a token to be used for logging in
-    def self.save_token(token)
+    def self.save_token(token, token_name)
       # Add this token
-      get_db[:tokens].insert(:token => token)
+      get_db[:tokens].insert(:token => token, :name => token_name)
     end
 
     # Get the github API token
@@ -60,7 +60,7 @@ module GithubDash
     # Get all the tokens saved
     def self.get_all_tokens
       get_db[:tokens].all.map do |t|
-        t[:token]
+        { token: t[:token], name: t[:name] }
       end
     end
 
@@ -96,6 +96,7 @@ module GithubDash
         @@db.create_table? :tokens do
           primary_key :id
           String :token
+          String :name
         end
       end
 

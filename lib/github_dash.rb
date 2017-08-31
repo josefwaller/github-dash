@@ -37,11 +37,11 @@ module GithubDash
     token = client.create_authorization(:scopes => ["repo"], :note => "github-dash token").token
 
     # Save it
-    DataDepository.save_token(token)
+    DataDepository.save_token(token, username)
   end
 
   # Add a token and set it to be used first when fetching repositories
-  def self.add_token(token)
-    DataDepository.save_token(token)
+  def self.add_token(token, token_name)
+    DataDepository.save_token(token, token_name)
   end
 end

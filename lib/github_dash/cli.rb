@@ -31,13 +31,14 @@ module GithubDash
 
           break if ans.downcase != "y"
 
-          tokens = GithubDash::DataDepository.get_all_tokens
-          tokens.each_with_index do |t, i|
-            @hl.say "#{i + 1} - #{t}"
+          @hl.choose do |menu|
+            tokens = GithubDash::DataDepository.get_all_tokens
+            tokens.each do |t|
+              menu.choice "#{t[:name]} (#{t[:token]})" do
+                token = t[:token]
+              end
+            end
           end
-
-          choice = @hl.ask "Which token do you want to use?"
-          token = tokens[Integer(choice) - 1]
         end
       end
     end
@@ -64,9 +65,10 @@ module GithubDash
     end
 
     desc "add_token TOKEN", "Save a token and set it to be used first for all repositories"
+    option :token_name, :aliases => [:n], :type => :string, :required => true
     def add_token(token)
-      GithubDash::add_token(token)
-      @hl.say "Added #{token}"
+      GithubDash::add_token(token, options[:token_name])
+      @hl.say "Added #{options[:token_name]}"
     end
 
     desc "following", "Show all the repopsitories the user is following"

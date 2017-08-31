@@ -124,7 +124,8 @@ RSpec.describe GithubDash::CLI do
     end
 
     it "saves a token" do
-      subject.add_token "test_token"
+      subject.options = {token_name: "test_token"}
+      subject.add_token "asdfasdfasdfasdf"
       expect(output).to include("added test_token")
     end
   end
