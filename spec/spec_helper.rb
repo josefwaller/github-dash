@@ -27,4 +27,11 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.before(:each) do
+    # Reset the cached database between tests
+    if GithubDash::DataDepository.class_variable_defined?(:@@db)
+      GithubDash::DataDepository.remove_class_variable(:@@db)
+    end
+  end
 end

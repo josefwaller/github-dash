@@ -8,11 +8,6 @@ RSpec.describe GithubDash::DataDepository do
   before(:each) do
     # For testing, always use a memory database
     allow(Sequel).to receive(:sqlite).and_return(database)
-
-    # Reset the cached database between tests
-    if GithubDash::DataDepository.class_variable_defined?(:@@db)
-      GithubDash::DataDepository.remove_class_variable(:@@db)
-    end
   end
 
   # Fill the database with example repositories for testing
