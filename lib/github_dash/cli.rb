@@ -161,10 +161,6 @@ module GithubDash
       def set_str_size(str, size)
         str.ljust(size)[0..size]
       end
-      
-      def set_hl(hl)
-        @hl = hl
-      end
     end
   end
 end

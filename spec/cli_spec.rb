@@ -9,7 +9,7 @@ RSpec.describe GithubDash::CLI do
     # Capture output from Thor
     @out = StringIO.new
     @in = StringIO.new
-    subject.set_hl HighLine.new(@in, @out)
+    allow(HighLine).to receive(:new).and_return(HighLine.new(@in, @out))
 
     allow(Sequel).to receive(:sqlite).and_return(Sequel.sqlite)
   end
