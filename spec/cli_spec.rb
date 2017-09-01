@@ -129,4 +129,25 @@ RSpec.describe GithubDash::CLI do
       expect(output).to include("added test_token")
     end
   end
+
+  describe "Compare review" do
+    before(:each) do
+      subject.options = {
+        :users => ["jhawthorn", "cbrunsdon"],
+        :repo_name => "solidusio/solidus",
+        :days => 10
+      }
+      VCR.use_cassette :solidus do
+        subject.compare_review
+      end
+    end
+
+    it "prints the repository name" do
+      expect(output).to include("solidusio/solidus")
+    end
+    it "prints the users" do
+      expect(output).to include("jhawthorn")
+      expect(output).to include("cbrunsdon")
+    end
+  end
 end

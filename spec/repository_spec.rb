@@ -72,5 +72,9 @@ RSpec.describe GithubDash::Repository do
       commits = @repo.get_commits(days=100)
       expect(commits.length).to eq(25)
     end
+    it "filters commits by user and day" do
+      commits = @repo.get_commits(7, "matthewd")
+      expect(commits.count).to eq(0)
+    end
   end
 end

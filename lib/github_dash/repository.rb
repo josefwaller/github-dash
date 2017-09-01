@@ -33,12 +33,12 @@ module GithubDash
     end
 
     # Get all commits in a certain time period
-    def get_commits(days=7, client=nil)
+    def get_commits(days=7, user=nil)
       update_commits if @commits.nil?
       # Note that while get_pull_requests can use take_while, commits will also include
       #   merges and therefore the dates are not neccissarily in order
       @commits.select do |c|
-        c.commit.author.date.to_date > Date.today - days
+        c.commit.author.date.to_date > Date.today - days && (user.nil? || c.committer.login == user)
       end
     end
 

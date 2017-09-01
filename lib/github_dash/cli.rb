@@ -4,6 +4,8 @@ require "highline"
 require "pp"
 require "fileutils"
 require "tty-cursor"
+require "tty-table"
+require "pastel"
 
 module GithubDash
   class CLI < Thor
@@ -69,6 +71,70 @@ module GithubDash
     def add_token(token)
       GithubDash::add_token(token, options[:token_name])
       @hl.say "Added #{options[:token_name]}"
+    end
+
+    desc "compare_review", "Print a comparative review of several user's commits on a certain repository"
+    option :repo_name, :aliases => [:r], :type => :string, :required => true
+    option :users, :aliases => [:u], :type => :array, :required => true
+    option :days, :aliases => [:d], :type => :numeric, :default => 7
+    def compare_review
+
+      # Get pastel for color
+      pastel = Pastel.new
+
+      # First, create headers, which is just
+      #   the user's option aligned center
+      headers = options[:users].map {|u| {value: u, alignment: :center}}
+
+      # Create a new table
+      table = TTY::Table.new :header => headers do |t|
+
+        # Create empty 2D array
+        rows = Array.new(options[:users].count) { [] }
+
+        # Fetch the repo
+        repo = GithubDash::fetch_repository options[:repo_name]
+
+        # Get the commit messages for each user
+        options[:users].each_with_index do |val, i|
+          commits = repo.get_commits(10, val)
+
+          # Add their messages to the rwos array
+          commits.each_with_index do |c, c_i|
+            rows[i].push c.commit.message.split("\n").first
+          end
+        end
+        # Pads the rows until they are all equal size
+        mx_size = rows.map(&:size).max
+        rows.each {|r| r.fill(nil, r.count, mx_size - r.count) }
+
+        # Since we have one user per row, but the table will have one user per column,
+        #   transpose the rows before adding them
+        rows.transpose.each do |r|
+          t << r
+        end
+      end
+
+      # Tell user what repos we are comparing
+      @hl.say "\n"
+      @hl.say "Comparing commits from #{pastel.bright_green(options[:repo_name])}" \
+              " in the last #{pastel.bright_green(options[:days])}".center(table.width)
+      @hl.say "\n"
+
+      # Pastel colors only show up when the table is saved as a string first
+      table_str = table.render(:unicode) do |r|
+        r.filter = Proc.new do |val, row_index, col_index|
+          if row_index == 0
+            pastel.yellow(val)
+          else
+            pastel.bright_blue(val)
+          end
+        end
+        r.padding = [0, 1]
+      end
+
+      # Print the table
+      @hl.say table_str
     end
 
     desc "following", "Show all the repopsitories the user is following"

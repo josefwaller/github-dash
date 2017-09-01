@@ -41,4 +41,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "tty-cursor", "~> 0.5.0"
   spec.add_dependency "sqlite3", "~> 1.3.13"
   spec.add_dependency "sequel", "~> 4.49.0"
+  spec.add_dependency "tty-table", "~> 0.8.0"
+  spec.add_dependency "pastel", "~> 0.7.1"
 end
