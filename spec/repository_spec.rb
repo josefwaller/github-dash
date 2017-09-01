@@ -16,6 +16,27 @@ RSpec.describe GithubDash::Repository do
       expect{GithubDash::Repository.new "not-exist/does-not-exist"}.to raise_error(Octokit::NotFound)
     end
   end
+  it "fetches info with a token if one exists for the repo" do
+    allow(GithubDash::DataDepository).to receive(:get_token_for_repo).with("josefwaller/pycatan").and_return("test_token")
+    allow(Octokit::Client).to receive(:new).with(:access_token => "test_token").and_return(Octokit::Client.new)
+
+    VCR.use_cassette :pycatan do
+      GithubDash::Repository.new("josefwaller/pycatan")
+    end
+
+    expect(Octokit::Client).to have_received(:new).with(:access_token => "test_token")
+  end
+  it "uses the most recent token for repositories without tokens" do
+    allow(GithubDash::DataDepository).to receive(:get_token_for_repo).with("josefwaller/pycatan").and_return(nil)
+    allow(GithubDash::DataDepository).to receive(:get_token).and_return("test_token")
+    allow(Octokit::Client).to receive(:new).with(:access_token => "test_token").and_return(Octokit::Client.new)
+
+    VCR.use_cassette :pycatan do
+      GithubDash::Repository.new("josefwaller/pycatan")
+    end
+
+    expect(Octokit::Client).to have_received(:new).with(:access_token => "test_token")
+  end
 
   context "given a repository" do
     before(:all) do

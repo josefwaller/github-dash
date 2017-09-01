@@ -49,6 +49,8 @@ module GithubDash
       repo_name ||= @repo_data.full_name
       # Get the token
       token = GithubDash::DataDepository.get_token_for_repo(repo_name)
+      # Use the most recent token if this repo doesn't have an associated token
+      token = GithubDash::DataDepository.get_token if token.nil?
       # Use default client if the token is nil
       Octokit if token.nil?
       # Return new client
