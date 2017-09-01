@@ -5,11 +5,13 @@ require "sequel"
 
 RSpec.describe GithubDash::CLI do
 
+  let(:test_prompt) { TTY::TestPrompt.new }
+
   before :each do
     # Capture output from Thor
-    @out = StringIO.new
-    @in = StringIO.new
-    allow(HighLine).to receive(:new).and_return(HighLine.new(@in, @out))
+    allow(TTY::Prompt).to receive(:new).and_return(test_prompt)
+    @out = test_prompt.output
+    @in = test_prompt.input
 
     allow(Sequel).to receive(:sqlite).and_return(Sequel.sqlite)
   end

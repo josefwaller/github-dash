@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 3.0.1"
   spec.add_development_dependency "vcr", "~> 3.0.3"
   spec.add_dependency "thor", "~> 0.19.4"
-  spec.add_dependency "highline", "~> 1.7.8"
+  spec.add_dependency "tty-prompt", "~> 0.13.2"
   spec.add_dependency "tty-cursor", "~> 0.5.0"
   spec.add_dependency "sqlite3", "~> 1.3.13"
   spec.add_dependency "sequel", "~> 4.49.0"
