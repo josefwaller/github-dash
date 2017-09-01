@@ -100,6 +100,13 @@ RSpec.describe GithubDash::DataDepository do
       expect(database[:tokens].all[0][:token]).to eq(test_token)
       expect(database[:tokens].all[0][:name]).to eq("Test Token")
     end
+    it "deletes a token" do
+      init_example_db
+
+      GithubDash::DataDepository.delete_token(ENV['GITHUB_DASH_TOKEN'])
+
+      expect(database[:tokens].all.size).to eq(0)
+    end
     it "fetches a token" do
       init_example_db
       expect(GithubDash::DataDepository.get_token).to eq(ENV['GITHUB_DASH_TOKEN'])

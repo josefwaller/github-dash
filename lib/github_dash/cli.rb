@@ -82,6 +82,31 @@ module GithubDash
       @prompt.say "Added #{@pastel.bright_blue(options[:token_name])}"
     end
 
+    desc "remove_tokens", "Delete one or more tokens"
+    def remove_tokens
+
+      # Get the tokens to remove
+      remove_tokens = @prompt.multi_select "Select which tokens to remove" do |menu|
+        GithubDash::DataDepository.get_all_tokens.each do |t|
+          menu.choice t[:name], t[:token]
+        end
+      end
+      @prompt.say "You are removing #{@pastel.bright_blue(remove_tokens.size)} tokens"
+
+      # Double check
+      if @prompt.yes?("Proceed: ")
+
+        # Remove the tokens
+        remove_tokens.each do |t|
+          GithubDash::DataDepository.delete_token(t)
+        end
+
+        @prompt.say "Removed #{@pastel.bright_blue(remove_tokens.size)} tokens."
+      else
+        @prompt.say "Cancelled"
+      end
+    end
+
     desc "compare_review", "Print a comparative review of several user's commits on a certain repository"
     option :repo_name, :aliases => [:r], :type => :string, :required => true
     option :users, :aliases => [:u], :type => :array, :required => true

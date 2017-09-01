@@ -130,6 +130,30 @@ RSpec.describe GithubDash::CLI do
       subject.add_token "asdfasdfasdfasdf"
       expect(output).to include("added test_token")
     end
+    it "deletes tokens" do
+
+      mock_tokens = [
+        {
+          :name => "token_one",
+          :token => "value_one"
+        },
+        {
+          :name => "token_two",
+          :token => "value_two"
+        }
+      ]
+      token_one = "token_one"
+      token_two = "token_two"
+      allow(GithubDash::DataDepository).to receive(:delete_token).with(/^(value_one|value_two)$/)
+      allow(GithubDash::DataDepository).to receive(:get_all_tokens).and_return(mock_tokens)
+
+      # Space to select the first token, then enter to submit the mulitple choice,
+      #   then y to confirm
+      @in << " \ry"
+      @in.rewind
+      subject.remove_tokens
+      expect(GithubDash::DataDepository).to have_received(:delete_token).with(mock_tokens[0][:token])
+    end
   end
 
   describe "Compare review" do

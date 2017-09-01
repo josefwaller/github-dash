@@ -47,6 +47,12 @@ module GithubDash
       get_db[:tokens].insert(:token => token, :name => token_name)
     end
 
+    # Delete a token
+    def self.delete_token(token)
+      # Delete it
+      get_db[:tokens].where(:token => token).delete
+    end
+
     # Get the github API token
     def self.get_token(place_from_last = 0)
       tokens = get_db[:tokens].order(:id)
@@ -88,15 +94,15 @@ module GithubDash
         #   with the same name.
         @@db.create_table? :repos do
           primary_key :id
-          String :name
+          String :name, :unique => true
           # The ID of the token used to fetch this repo
           foriegn_key :token_id
         end
 
         @@db.create_table? :tokens do
           primary_key :id
-          String :token
-          String :name
+          String :token, :unique => true
+          String :name, :unique => true
         end
       end
 
