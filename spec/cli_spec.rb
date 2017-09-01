@@ -55,9 +55,7 @@ RSpec.describe GithubDash::CLI do
     expect(output).to include "repository is already followed"
   end
   it "doesn't add a repository that does not exist" do
-    # Out: Do you want to try with a different token? [Y/n]
-    @in << "n"
-    @in.rewind
+    allow(test_prompt).to receive(:yes?).and_return(false)
     VCR.use_cassette :not_exist, :record => :new_episodes do
       subject.add_repo "doesnot/exist"
     end
@@ -103,9 +101,8 @@ RSpec.describe GithubDash::CLI do
       allow(client).to receive(:login).and_return("mygithubusername")
       allow(Octokit::Client).to receive(:new).and_return(client)
       # Add input
-      @in << "josefwaller\n"
-      @in << "#{ENV['GITHUB_PASSWORD']}\n"
-      @in.rewind
+      allow(test_prompt).to receive(:ask).with(instance_of(String)).and_return("josefwaller")
+      allow(test_prompt).to receive(:ask).with(instance_of(String), hash_including(:echo => false)).and_return(ENV['GITHUB_PASSWORD'])
       VCR.use_cassette :exampleprivate do
         subject.login
       end
@@ -141,13 +138,9 @@ RSpec.describe GithubDash::CLI do
       ]
       token_one = "token_one"
       token_two = "token_two"
-      allow(GithubDash::DataDepository).to receive(:delete_token).with(/^(value_one|value_two)$/)
+      allow(GithubDash::DataDepository).to receive(:delete_token).with(mock_tokens[0][:token])
       allow(GithubDash::DataDepository).to receive(:get_all_tokens).and_return(mock_tokens)
-
-      # Space to select the first token, then enter to submit the mulitple choice,
-      #   then y to confirm
-      @in << " \ry"
-      @in.rewind
+      allow(test_prompt).to receive(:multi_select).and_return([mock_tokens[0][:token]])
       subject.remove_tokens
       expect(GithubDash::DataDepository).to have_received(:delete_token).with(mock_tokens[0][:token])
     end
