@@ -54,14 +54,19 @@ module GithubDash
       end
     end
 
-    desc "remove_repo REPO_NAME", "Removes a repository from the 'followed repositories' list"
-    def remove_repo(name)
-      begin
-        GithubDash::remove_repo_from_following(name)
-        @prompt.say "Removed #{name.downcase}."
-      rescue ArgumentError
-        @prompt.say "Could not remove #{name.downcase}. Not following."
+    desc "remove_repos", "Remove one repository from the 'followed repositories' list"
+    def remove_repos
+      # Prompt user for repos
+      repos = @prompt.multi_select "Select which repos to remove" do |menu|
+        GithubDash::DataDepository.get_following.each do |r|
+          menu.choice r
+        end
       end
+      # Delete each one
+      repos.each do |name|
+        GithubDash::remove_repo_from_following(name)
+      end
+      @prompt.say "Removed #{repos.size} repositories."
     end
 
     desc "login", "Log into github to allow access to private repositories and increase API limit."

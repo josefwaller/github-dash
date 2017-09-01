@@ -78,19 +78,16 @@ RSpec.describe GithubDash::CLI do
     expect(output).to include "josefwaller/pycatan"
     expect(output).to include "josefwaller/github-dash"
   end
-  it "removes repositories with remove_repo" do
+  it "removes repositories with remove_repos" do
+    allow(GithubDash::DataDepository).to receive(:get_following).and_return (["josefwaller/pycatan"])
+    allow(GithubDash::DataDepository).to receive(:remove_repo).with("josefwaller/pycatan")
+    allow(test_prompt).to receive(:multi_select).and_return(["josefwaller/pycatan"])
     VCR.use_cassette :pycatan do
-      subject.add_repo "josefwaller/pycatan"
-      subject.remove_repo "josefwaller/pycatan"
+      subject.remove_repos
     end
-    expect(output).to include "removed josefwaller/pycatan"
+    expect(output).to include "removed 1 repo"
+    expect(GithubDash::DataDepository).to have_received(:remove_repo).with("josefwaller/pycatan")
   end
-  it "warns the user if they try to remove a repository they are not following" do
-    subject.remove_repo "josefwaller/pycatan"
-    expect(output).to include "could not remove josefwaller/pycatan"
-    expect(output).to include "not following"
-  end
-
   describe "Authentication" do
     let(:token_resource) { double(Sawyer::Resource) }
     before(:each) do
