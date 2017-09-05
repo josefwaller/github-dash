@@ -31,7 +31,7 @@ module GithubDash
           break
         rescue Octokit::NotFound, Octokit::Unauthorized
           # Prompt user to enter another token
-          @prompt.say "Could not find #{name} on github using #{@pastel.light_blue(token)}."
+          @prompt.say "Could not find #{name} on github using #{@pastel.bright_blue(token)}."
           ans = @prompt.yes? "Do you want to try with a different token?"
 
           # break if they said no
