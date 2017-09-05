@@ -76,8 +76,20 @@ module GithubDash
       username = @prompt.ask("Enter username: ")
       password = @prompt.ask("Enter password: ", echo: false)
 
-      GithubDash::add_user(username, password)
-      @prompt.say "Added #{@pastel.bright_blue(username)}"
+      begin
+        GithubDash::add_user(username, password)
+        @prompt.say "Added #{@pastel.bright_blue(username)}"
+      rescue Octokit::UnprocessableEntity
+        # The user might already have logged in from another devise
+        #   So we might have to generate a new token
+        @prompt.say "There is already a github-dash token for this user!"
+        @prompt.say "Generate a new one for this devise?"
+        @prompt.say "It will be saved as 'github-dash token [TIMESTAMP]'."
+        if @prompt.yes? "Generate?"
+          GithubDash::add_user(username, password, "github-dash token #{Time.now.to_i}")
+          @prompt.say "Added #{@pastel.bright_blue(username)}"
+        end
+      end
     end
 
     desc "add_token TOKEN", "Save a token and set it to be used first for all repositories"

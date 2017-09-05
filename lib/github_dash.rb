@@ -31,10 +31,10 @@ module GithubDash
   end
 
   # Save a user's token for getting private repositories
-  def self.add_user(username, password)
+  def self.add_user(username, password, name="github-dash token")
     # Create new token
     client = Octokit::Client.new :login => username, :password => password
-    token = client.create_authorization(:scopes => ["repo"], :note => "github-dash token").token
+    token = client.create_authorization(:scopes => ["repo"], :note => name).token
 
     # Save it
     DataDepository.save_token(token, username)

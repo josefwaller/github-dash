@@ -109,6 +109,22 @@ RSpec.describe GithubDash::CLI do
       expect(output).to include("added josefwaller")
     end
 
+    it "generates a new token if the token's name is taken" do
+
+      allow(GithubDash).to receive(:add_user).with("josefwaller", ENV['GITHUB_PASSWORD'])
+        .and_raise(Octokit::UnprocessableEntity)
+      allow(GithubDash).to receive(:add_user).with(any_args, "github-dash token #{Time.now.to_i}")
+      allow(test_prompt).to receive(:ask).with(/username/).and_return("josefwaller")
+      allow(test_prompt).to receive(:ask).with(/password/, any_args).and_return(ENV['GITHUB_PASSWORD'])
+      allow(test_prompt).to receive(:yes?).with(/Generate/).and_return(true)
+
+      VCR.use_cassette :exampleprivate do
+        subject.login
+      end
+
+      expect(GithubDash).to have_received(:add_user).with(any_args, "github-dash token #{Time.now.to_i}")
+    end
+
     it "allows access to private repositories when given a token" do
       VCR.use_cassette :exampleprivate do
         subject.options = {:days => 7}
